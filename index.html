@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c080d">
+  <meta name="description" content="CRAVE is a ten-girl dating sim with a very literal happy ending. Choose your words carefully.">
+  <title>CRAVE — a dating sim with teeth</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230c080d'/%3E%3Cpath d='M32 49C13 37 10 26 17 20c5-5 12-2 15 4 3-6 10-9 15-4 7 6 4 17-15 29Z' fill='%23ff5f8f'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="ambient" aria-hidden="true">
+    <span class="ambient-orb orb-a"></span>
+    <span class="ambient-orb orb-b"></span>
+    <span class="ambient-orb orb-c"></span>
+    <span class="ambient-grid"></span>
+  </div>
+
+  <main id="app">
+    <!-- ============================================================
+         CHARACTER SELECT
+    ============================================================= -->
+    <section class="screen selection is-active" id="selection-screen" aria-labelledby="select-title">
+      <header class="site-header">
+        <a class="brand" href="#selection-screen" aria-label="CRAVE home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 33C6.5 24.5 4.5 17 9.2 12.7c3.4-3.1 8-1.5 10.8 2.3 2.8-3.8 7.4-5.4 10.8-2.3C35.5 17 33.5 24.5 20 33Z" fill="currentColor"/><path d="M13 20.5c2.2 2.9 4.8 5.2 8 7.1" stroke="#0c080d" stroke-width="1.6" stroke-linecap="round" opacity=".5"/></svg>
+          </span>
+          <span class="brand-name">CRAVE</span>
+          <span class="brand-sub">a dating sim with teeth</span>
+        </a>
+        <div class="header-note">
+          <span class="live-dot"></span>
+          <span>10 girls online</span>
+        </div>
+        <div class="header-rule">
+          <span>EST. 2026</span>
+          <span>18+ themes</span>
+        </div>
+      </header>
+
+      <div class="select-intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span class="eyebrow-mark"></span>One date. One appetite.</p>
+          <h1 id="select-title">Pick the girl who gets to <em>keep you.</em></h1>
+          <p class="intro-sub">Read her. Choose your words. Fill her heart — or find out what happens when you don’t.</p>
+        </div>
+
+        <aside class="rules-card" aria-label="How the game works">
+          <div class="rules-head">
+            <span>THE RULES</span>
+            <span class="rules-count">01—03</span>
+          </div>
+          <ol class="rules-list">
+            <li><span class="rule-arrow up">↗</span><span><b>Right thing</b> — love rises</span></li>
+            <li><span class="rule-arrow down">↘</span><span><b>Wrong thing</b> — love falls</span></li>
+            <li><span class="rule-arrow flat">—</span><span><b>Don’t care</b> — no change</span></li>
+          </ol>
+          <p class="rules-warning">At <strong>100%</strong> she eats you.<br>At <strong>0%</strong> she eats you.<br><span>Only one is a happy ending.</span></p>
+        </aside>
+      </div>
+
+      <div class="girl-grid" id="girl-grid" aria-label="Choose your date"></div>
+
+      <footer class="select-footer">
+        <div><span class="tiny-heart" aria-hidden="true">♥</span> All characters are adults, 21+.</div>
+        <div class="footer-center">Soft vore · dark comedy · questionable flirting</div>
+        <div>Tip: read the <em>danger</em> line.</div>
+      </footer>
+    </section>
+
+    <!-- ============================================================
+         DATE
+    ============================================================= -->
+    <section class="screen date-screen" id="date-screen" aria-labelledby="date-name">
+      <div class="date-atmosphere" aria-hidden="true">
+        <span class="date-word" id="date-word">MINA</span>
+        <span class="date-ring ring-one"></span>
+        <span class="date-ring ring-two"></span>
+        <span class="date-spark spark-a">✦</span>
+        <span class="date-spark spark-b">✧</span>
+        <span class="date-spark spark-c">✦</span>
+      </div>
+
+      <header class="game-header">
+        <button class="text-button back-button" id="quit-date" type="button">
+          <span aria-hidden="true">←</span> Change girl
+        </button>
+        <div class="game-brand">CRAVE<span>/DATE</span></div>
+        <div class="date-index">
+          <span id="date-number">DATE 01</span>
+          <span class="date-progress"><i id="date-progress-fill"></i></span>
+          <span id="date-turns">TURN 01</span>
+        </div>
+      </header>
+
+      <div class="date-layout">
+        <aside class="date-character">
+          <div class="portrait-frame" id="date-portrait">
+            <span class="portrait-label">TONIGHT’S DATE</span>
+            <span class="portrait-corner">♥</span>
+          </div>
+          <div class="character-caption">
+            <p class="char-kicker"><span id="date-char-no">01</span> / 10 <span id="date-handle">@minamochi</span></p>
+            <h2 id="date-name">Mina Park</h2>
+            <p class="char-tag" id="date-tag">The Sweet Streamer</p>
+          </div>
+          <div class="danger-card">
+            <span class="danger-icon" aria-hidden="true">!</span>
+            <p><span>Danger</span><b id="date-danger">will stream your first date</b></p>
+          </div>
+          <p class="char-blurb" id="date-blurb"></p>
+        </aside>
+
+        <section class="dialogue-panel" aria-label="Conversation">
+          <div class="love-panel">
+            <div class="love-heading">
+              <div class="love-label">
+                <span class="heart-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 21C3.8 15.8 2.4 11 5.6 8.1 7.8 6.1 10.7 7 12 9.5 13.3 7 16.2 6.1 18.4 8.1c3.2 2.9 1.8 7.7-6.4 12.9Z" fill="currentColor"/></svg>
+                </span>
+                <span>Love</span>
+                <strong id="love-number">40%</strong>
+              </div>
+              <div class="love-status">
+                <span id="love-status">Curious</span>
+                <small id="love-note">She hasn’t decided what to do with you yet.</small>
+              </div>
+            </div>
+            <div class="love-meter" id="love-meter" role="progressbar" aria-label="Love meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
+              <div class="love-track">
+                <div class="love-fill" id="love-fill"></div>
+                <div class="love-shine" id="love-shine"></div>
+                <div class="love-ticks" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                </div>
+              </div>
+              <span class="meter-heart" id="meter-heart" aria-hidden="true">♥</span>
+              <span class="love-delta" id="love-delta" aria-hidden="true"></span>
+            </div>
+            <div class="love-scale" aria-hidden="true"><span>0 — she’s done</span><span>50</span><span>100 — dinner</span></div>
+          </div>
+
+          <div class="conversation">
+            <div class="speaker-row">
+              <span class="speaker-dot"></span>
+              <span id="speaker-name">Mina</span>
+              <span class="speaker-says">says</span>
+              <span class="turn-chip" id="turn-chip">TURN 01</span>
+            </div>
+            <blockquote class="dialogue-text" id="dialogue-text"></blockquote>
+            <div class="reaction" id="reaction" aria-live="polite" hidden>
+              <span class="reaction-glyph" id="reaction-glyph" aria-hidden="true">↗</span>
+              <p id="reaction-text"></p>
+              <span class="reaction-effect" id="reaction-effect">+14 love</span>
+            </div>
+          </div>
+
+          <div class="responses" id="responses" aria-label="Your responses"></div>
+          <p class="date-hint" id="date-hint">Choose what to say. There are no takebacks.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BELLY
+    ============================================================= -->
+    <section class="screen belly-screen" id="belly-screen" aria-labelledby="belly-title">
+      <div class="belly-atmosphere" aria-hidden="true">
+        <span class="flesh-blob blob-a"></span>
+        <span class="flesh-blob blob-b"></span>
+        <span class="flesh-blob blob-c"></span>
+        <span class="belly-grain"></span>
+      </div>
+
+      <header class="belly-header">
+        <div>
+          <p class="eyebrow belly-kicker" id="belly-kicker"><span class="eyebrow-mark"></span>Inside Mina</p>
+          <h1 id="belly-title">Her heartbeat is everywhere.</h1>
+        </div>
+        <div class="belly-love">
+          <span id="belly-percent">100</span><sup>%</sup>
+          <small>LOVE</small>
+        </div>
+      </header>
+
+      <div class="belly-layout">
+        <div class="belly-chamber" id="belly-chamber">
+          <div class="chamber-ridges" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="acid" id="acid" aria-hidden="true">
+            <div class="acid-surface"></div>
+          </div>
+          <div class="chamber-glow" aria-hidden="true"></div>
+          <div class="chamber-hearts" id="chamber-hearts" aria-hidden="true"></div>
+
+          <div class="player" id="player" aria-label="You, inside her stomach">
+            <span class="player-shadow"></span>
+            <svg viewBox="0 0 120 130" aria-hidden="true">
+              <path d="M60 25c-17 0-28 12-28 27 0 13 8 23 18 27l-3 23c-12 3-21 10-24 22h74c-3-12-12-19-24-22l-3-23c10-4 18-14 18-27 0-15-11-27-28-27Z" fill="#ffe9d6"/>
+              <path d="M60 31c-14 0-23 9-23 21 0 3 1 7 2 10 3-8 11-13 21-13s18 5 21 13c1-3 2-7 2-10 0-12-9-21-23-21Z" fill="#332a36"/>
+              <circle cx="49" cy="58" r="2.4" fill="#332a36"/><circle cx="71" cy="58" r="2.4" fill="#332a36"/>
+              <path d="M55 68q5 5 10 0" fill="none" stroke="#b9646f" stroke-width="2" stroke-linecap="round"/>
+              <ellipse cx="42" cy="65" rx="5" ry="2.5" fill="#e99a9e" opacity=".65"/>
+              <ellipse cx="78" cy="65" rx="5" ry="2.5" fill="#e99a9e" opacity=".65"/>
+            </svg>
+            <span class="player-tag">YOU</span>
+          </div>
+
+          <div class="bubbles" id="bubble-layer" aria-hidden="true"></div>
+          <div class="giggle-bubble" id="giggle-bubble" role="status" aria-live="polite" hidden></div>
+          <div class="chamber-caption">
+            <span id="chamber-mode">SAFE HARBOR</span>
+            <span id="chamber-temp">BODY TEMP · 37.2°C</span>
+          </div>
+        </div>
+
+        <aside class="belly-side">
+          <div class="belly-girl-wrap">
+            <div class="belly-girl" id="belly-girl"></div>
+            <div class="belly-girl-ring" aria-hidden="true"></div>
+            <span class="belly-girl-label" id="belly-girl-label">MINA · OUTSIDE</span>
+          </div>
+          <blockquote class="belly-quote" id="belly-quote">“You fit so perfectly here.”</blockquote>
+
+          <div class="belly-status">
+            <div class="status-row"><span>STATUS</span><strong id="belly-status">SAFE HARBOR</strong></div>
+            <div class="status-row"><span>DIGESTION</span><strong id="belly-digestion">PAUSED</strong></div>
+            <div class="status-row"><span>SQUIRMS</span><strong id="struggle-count">00</strong></div>
+            <div class="status-row"><span>TIME INSIDE</span><strong id="inside-time">00:00</strong></div>
+            <div class="status-row"><span>ACID</span><strong id="acid-value">00%</strong></div>
+          </div>
+
+          <div class="belly-actions">
+            <button class="button primary struggle-button" id="struggle-btn" type="button">
+              <span class="button-icon" aria-hidden="true">↯</span>
+              <span><b>Struggle</b><small>she likes the company</small></span>
+            </button>
+            <button class="button ghost leave-button" id="leave-btn" type="button">
+              Ask to leave
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <p class="belly-hint" id="belly-hint">You can stay as long as you want. She’s not in a hurry.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DEATH
+    ============================================================= -->
+    <section class="screen death-screen" id="death-screen" aria-labelledby="death-title">
+      <div class="death-halo" aria-hidden="true"></div>
+      <div class="death-inner">
+        <p class="eyebrow"><span class="eyebrow-mark"></span>Digestion complete</p>
+        <h1 id="death-title">You died.</h1>
+        <p class="death-sub">You were delicious.</p>
+        <blockquote class="death-quote" id="death-quote"></blockquote>
+        <div class="death-stats">
+          <div><span>DATE</span><strong id="death-girl">Mina</strong></div>
+          <div><span>FINAL LOVE</span><strong>00%</strong></div>
+          <div><span>CAUSE</span><strong>Said the wrong thing</strong></div>
+        </div>
+        <button class="button primary restart-button" id="restart-btn" type="button">
+          <span>Restart</span>
+          <span class="restart-icon" aria-hidden="true">↻</span>
+        </button>
+        <p class="death-note">She saved your number. Just in case.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         OUTRO
+    ============================================================= -->
+    <section class="screen outro-screen" id="outro-screen" aria-labelledby="outro-title">
+      <div class="outro-inner">
+        <p class="eyebrow"><span class="eyebrow-mark"></span>Date ended · you lived</p>
+        <h1 id="outro-title">She let you go.</h1>
+        <p class="outro-sub">For now.</p>
+        <blockquote class="outro-quote" id="outro-quote"></blockquote>
+        <div class="outro-stats">
+          <div><span>DATE</span><strong id="outro-girl">Mina</strong></div>
+          <div><span>LOVE</span><strong>100%</strong></div>
+          <div><span>TIME INSIDE</span><strong id="outro-time">01:24</strong></div>
+        </div>
+        <div class="outro-actions">
+          <button class="button primary" id="outro-restart" type="button">Date her again <span aria-hidden="true">↻</span></button>
+          <button class="button ghost" id="outro-back" type="button">Pick another girl</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- full-screen swallow transition -->
+  <div class="eat-wipe" id="eat-wipe" aria-hidden="true">
+    <div class="wipe-ring ring-a"></div>
+    <div class="wipe-ring ring-b"></div>
+    <div class="wipe-ring ring-c"></div>
+    <div class="wipe-content">
+      <p id="wipe-kicker">LOVE AT 100%</p>
+      <h2 id="wipe-text">GULP.</h2>
+      <p id="wipe-sub">She swallows.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
